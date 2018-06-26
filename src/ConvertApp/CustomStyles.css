@@ -1,97 +1,63 @@
+body {
+  background-color: grey;
+}
+
 .exchange{
   font-weight: 600;
   color: green;
   padding-top: 2em;
 }
 
-.loader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100px;
-    height: 100px;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    visibility: hidden;
-    transition-delay: 0.2s;
-    .icon {
-        width: 100px;
-        height: 100px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        background: url('./icon_loader.svg') no-repeat 0 0;
-        background-size: 248px 248px;
-    }
-}
-.is-loading {
-    .loader {
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.3s linear, visibility 0.3s linear;
-        z-index: 3;
-        .icon {
-            animation: spin 500ms infinite linear;
-        }
-    }
-}
-
-@keyframes spin {
-    0% { transform: rotate(0); transform-origin: center center; }
-    100% { transform: rotate(360deg); transform-origin: center center; }
-}
-
 .content {
     background-color: #fff;
-    padding: 20px;
+    padding: 50px;
     border-radius: 7px;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-    .table {
-        margin-bottom: 0;
-        td,th {
-            vertical-align: middle
-        }
-        .mRight {
-            margin-right: 20px;
-        }
-    }
-    .row {
-        margin-bottom: 20px;
-        h3 {
-            padding-left: 40px;
-        }
-        .currency-flag {
-            background: url('./images/usd.png') no-repeat left center;
-            background-size: 30px auto;
-            &.CAD {background-image: url('./images/cad.png')}
-            &.USD {background-image: url('./images/aud.png')}
-            &.JPY {background-image: url('./images/jpy.png')}
-            &.NZD {background-image: url('./images/nzd.png')}
-            &.GBP {background-image: url('./images/gbp.png')}
-        }
-    }
-    .row-select-currency {
-        text-align: center;
-    }
-    @media(min-width: 768px){
+    text-align: left;
+}
 
-        .currency-from-input {
-            position: relative;
-            padding-right: 20px;
-            &:after {
-                content: '=';
-                display: block;
-                position: absolute;
-                right: -8px;
-                bottom: 4px;
-                font-weight: bold;
-                font-size: 30px;
-                line-height: 0.9
-            }
-        }
-        .currency-to-input {
-            padding-left: 20px;
-        }
+.select {
+  text-align: left;
+  margin-left: 0;
+  padding-bottom: 2em;
+}
+.table {
+    margin-bottom: 0;
+}
 
-    }
+.table td,th {
+    vertical-align: middle;
+}
+
+.table .mRight {
+    margin-right: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.row-select-currency {
+    text-align: center;
+}
+
+@media(min-width: 768px){}
+
+.currency-from-input {
+    position: relative;
+    padding-right: 20px;
+}
+/* .currency-from-input:after {
+    content: '=';
+    display: block;
+    position: absolute;
+    right: -8px;
+    bottom: 4px;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 0.9
+} */
+
+.currency-to-input {
+    padding-left: 20px;
 }

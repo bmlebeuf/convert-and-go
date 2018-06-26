@@ -56,9 +56,9 @@ class App extends React.Component {
   render(){
     const {currencies, currencyA, currencyB, currencyAval, currencyBval} = this.state;
     return (
-        <div className="content">
+        <div className="content container">
           <div className="row row-select-currency">
-            <div className="col-md-6 col-md-offset-3">
+            <div className="col-md-6 select">
               <h2>Select Currency</h2>
               <p>
                 <SelectCurrency currencies={currencies} onSelectCurrency={this.onSelectCurrency} />
@@ -70,21 +70,21 @@ class App extends React.Component {
             <div className="col-sm-6 currency-from-input">
               <h3>{currencyA.name}</h3>
               <div className="input-group">
-                <span className="input-group-addon">{currencyA.sign}</span>
+                <span className="input-group-text">{currencyA.sign}</span>
                 <input type="number" value={currencyAval} className="form-control" aria-describedby="basic-addon2" step="1" pattern="\d\.\d{2}" onChange={(e) => {
                   this.onChangeHandler(e, 'A');
                 }} />
-                <span className="input-group-addon" id="basic-addon2">{currencyA.code}</span>
+                <span className="input-group-text" id="basic-addon2">{currencyA.code}</span>
               </div>
             </div>
             <div className="col-sm-6 currency-to-input">
               <h3>{currencyB.name}</h3>
               <div className="input-group">
-                <span className="input-group-addon">{currencyB.sign}</span>
+                <span className="input-group-text">{currencyB.sign}</span>
                 <input type="number" value={currencyBval} className="form-control" aria-describedby="basic-addon3" step="1" pattern="\d\.\d{2}"  onChange={(e) => {
                   this.onChangeHandler(e, 'B');
                 }}/>
-                <span className="input-group-addon" id="basic-addon3">{currencyB.code}</span>
+                <span className="input-group-text" id="basic-addon3">{currencyB.code}</span>
               </div>
             </div>
           </div>
