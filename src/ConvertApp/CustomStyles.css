@@ -1,11 +1,13 @@
 body {
   background-color: grey;
+  font-family: 'Lato', sans-serif;
 }
 
 .exchange{
   font-weight: 600;
   color: green;
   padding-top: 2em;
+  font-size: 18px;
 }
 
 .content {
@@ -47,16 +49,16 @@ body {
     position: relative;
     padding-right: 20px;
 }
-/* .currency-from-input:after {
-    content: '=';
+.currency-from-input:after {
+    content: '⇨';
     display: block;
     position: absolute;
-    right: -8px;
-    bottom: 4px;
+    right: -15px;
+    bottom: 6px;
     font-weight: bold;
-    font-size: 30px;
-    line-height: 0.9
-} */
+    font-size: 25px;
+    line-height: 0.9;
+}
 
 .currency-to-input {
     padding-left: 20px;
