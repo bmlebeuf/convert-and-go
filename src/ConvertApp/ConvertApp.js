@@ -1,60 +1,104 @@
 import React, { Component } from 'react';
+import data from './DataCurrency'
+import './CustomStyles.css';
+import SelectCurrency from './SelectCurrency'
 
-class ConvertApp extends React.Component {
-  render() {
-    return(
-      <div className="content">
+class App extends React.Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      currencies: data.currencies,
+      currencyA: data.currencies[0],
+      currencyB: data.currencies[1],
+      currencyAval: data.currencies[0].sellRate,
+      currencyBval: data.currencies[1].sellRate
+    }
+
+    this.onSelectCurrency = this.onSelectCurrency.bind(this);
+
+  }
+
+  onSelectCurrency(code){
+    const {currencies, currencyAval} = this.state;
+    const currency = currencies.filter(currency => currency.code === code);
+    this.setState({
+      currencyB: currency[0],
+      currencyBval: currencyAval * currency[0].sellRate
+    })
+  }
+
+  onChangeHandler(e, currency){
+
+    const {currencyA, currencyB} = this.state;
+
+    if(currency === 'A'){
+
+      const newValueA = e.target.value;
+      this.setState({
+        currencyAval: newValueA,
+        currencyBval: newValueA * currencyB.sellRate
+      })
+
+    } else if(currency === 'B'){
+
+      const newValueB = e.target.value;
+      this.setState({
+        currencyAval: newValueB / currencyB.sellRate,
+        currencyBval: newValueB
+      })
+
+    }
+
+  }
+
+  render(){
+    const {currencies, currencyA, currencyB, currencyAval, currencyBval} = this.state;
+    return (
+        <div className="content">
           <div className="row row-select-currency">
             <div className="col-md-6 col-md-offset-3">
-              <h3>Select Currency</h3>
+              <h2>Select Currency</h2>
               <p>
-                {
-                  //Select currency
-                }
-                <select>
-                  <option value="A">Option A</option>
-                  <option value="B">Option B</option>
-                </select>
+                <SelectCurrency currencies={currencies} onSelectCurrency={this.onSelectCurrency} />
               </p>
             </div>
           </div>
-          <div className="row">
-            <div className="col-sm-12">
-              {
-                  //Update to currently selected currency
-              }
-              <p>
-                Exchange Rate $ 1 USD = $ 0.7041 NZD
-              </p>
-            </div>
-          </div>
+
           <div className="row">
             <div className="col-sm-6 currency-from-input">
-              <h3 className="currency-flag AUD">Australian Dollars</h3>
-              {
-                  //Currency A input
-              }
+              <h3>{currencyA.name}</h3>
               <div className="input-group">
-                <span className="input-group-addon">$</span>
-                <input type="number" defaultValue={0} className="form-control" aria-describedby="basic-addon2" step="1" pattern="\d\.\d{2}"  />
-                <span className="input-group-addon" id="basic-addon2">AUD</span>
+                <span className="input-group-addon">{currencyA.sign}</span>
+                <input type="number" value={currencyAval} className="form-control" aria-describedby="basic-addon2" step="1" pattern="\d\.\d{2}" onChange={(e) => {
+                  this.onChangeHandler(e, 'A');
+                }} />
+                <span className="input-group-addon" id="basic-addon2">{currencyA.code}</span>
               </div>
             </div>
             <div className="col-sm-6 currency-to-input">
-              <h3 className="currency-flag USD">United States Dollars</h3>
-              {
-                  //Currency B input
-              }
+              <h3>{currencyB.name}</h3>
               <div className="input-group">
-                <span className="input-group-addon">$</span>
-                <input type="number" defaultValue={0} className="form-control" aria-describedby="basic-addon3" step="1" pattern="\d\.\d{2}"  />
-                <span className="input-group-addon" id="basic-addon3">USD</span>
+                <span className="input-group-addon">{currencyB.sign}</span>
+                <input type="number" value={currencyBval} className="form-control" aria-describedby="basic-addon3" step="1" pattern="\d\.\d{2}"  onChange={(e) => {
+                  this.onChangeHandler(e, 'B');
+                }}/>
+                <span className="input-group-addon" id="basic-addon3">{currencyB.code}</span>
               </div>
             </div>
           </div>
-      </div>
+
+          <div className="row">
+            <div className="col-sm-12">
+              <p className="exchange">
+                Exchange Rate: {`${currencyA.sign} ${currencyA.sellRate} ${currencyA.code}`} = {`${currencyB.sign} ${currencyB.sellRate} ${currencyB.code}`}
+              </p>
+            </div>
+          </div>
+        </div>
     )
   }
 }
 
-export default ConvertApp;
+export default App;
